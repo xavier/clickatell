@@ -117,7 +117,7 @@ module Clickatell
         :to => '4477791234567',
         :text => 'hello world & goodbye'
       ).returns(response = stub('response'))
-      Response.stubs(:parse).with(response).returns('ID' => 'message_id', 'To' => '4477791234567')
+      Response.stubs(:parse).with(response).returns('ID' => 'message_id')
       @api.send_message('4477791234567', 'hello world & goodbye').should == {'4477791234567' => 'message_id'}
     end
 

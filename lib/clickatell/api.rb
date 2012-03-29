@@ -94,7 +94,7 @@ module Clickatell
         {:to => recipient, :text => message_text}.merge(valid_options)
       )
       response = parse_response(response)
-      response.is_a?(Array) ? response.inject({}) { |h, r| h[r['To']] = r['ID']; h } : {response['To'] => response['ID']}
+      response.is_a?(Array) ? response.inject({}) { |h, r| h[r['To']] = r['ID']; h } : {recipient => response['ID']}
     end
 
     def send_wap_push(recipient, media_url, notification_text='', opts={})
