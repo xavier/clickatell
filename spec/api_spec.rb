@@ -126,8 +126,8 @@ module Clickatell
         :to => '4477791234567,447779999999',
         :text => 'hello world & goodbye'
       ).returns(response = stub('response'))
-      Response.stubs(:parse).with(response).returns([{'ID' => 'message_1_id'}, {'ID' => 'message_2_id'}])
-      @api.send_message(['4477791234567', '447779999999'], 'hello world & goodbye').should == ['message_1_id', 'message_2_id']
+      Response.stubs(:parse).with(response).returns([{'ID' => 'message_1_id', 'To' => '4477791234567'}, {'ID' => 'message_2_id', 'To' => '447779999999'}])
+      @api.send_message(['4477791234567', '447779999999'], 'hello world & goodbye').should == {'4477791234567' => 'message_1_id', '447779999999' => 'message_2_id'}
     end
 
     it "should set the :from parameter and set the :req_feat to 48 when using a custom from string when sending a message" do
