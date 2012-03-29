@@ -117,8 +117,8 @@ module Clickatell
         :to => '4477791234567',
         :text => 'hello world & goodbye'
       ).returns(response = stub('response'))
-      Response.stubs(:parse).with(response).returns('ID' => 'message_id')
-      @api.send_message('4477791234567', 'hello world & goodbye').should == 'message_id'
+      Response.stubs(:parse).with(response).returns('ID' => 'message_id', 'To' => '4477791234567')
+      @api.send_message('4477791234567', 'hello world & goodbye').should == {'4477791234567' => 'message_id'}
     end
 
     it "should support sending messages to a multiple numbers, returning the message ids" do
